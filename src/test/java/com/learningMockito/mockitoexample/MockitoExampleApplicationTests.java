@@ -52,5 +52,14 @@ class MockitoExampleApplicationTests {
 			mockList.get(0);
 			});
 	}
+	
+	/*
+	 * 
+	 * BDD Approach of unit testing
+	 * */
+	
+	public void mockListBDDStyle() {
+		
+	}
 
 }
