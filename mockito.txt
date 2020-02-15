@@ -1,0 +1,92 @@
+Mockito Notes:
+-mock(List.class);
+	-creates a mockup of the given class in argument.
+-when(mockList.size()).thenReturn(2);
+	-we can controll the method return value for testing in assert.
+-when(mockList.size()).thenReturn(2,3,4,6);
+	-same as above with multiple return values.
+	**if no behaviour has been controlled for a method it will return its default value.
+-when(mockList.get(anyInt())).thenReturn("test Success");
+	-with 'anyInt()' 'argument matcher' we can pass any integer value to get the specified return value.
+-when(mockList.get(anyInt())).thenThrow(new RuntimeException("test throw"));
+-assertThrows(RuntimeException.class,() ->{
+mockList.get(0);
+});
+-in above code we are assuring the exception thrown by a method.
+_______________________________________________________________________________
+-BDD(Behaviour Driven development)
+-given(mockList.get(anyInt())).willReturn("hello munna");
+	-given scenario
+-assertThat(res, is("hello munna"));
+	-checking the given scenario under testcase.
+-verify(fareService).fareCacheSearch("3");
+	-verifies that the method call is invoked.
+	-fails if not invoked or invoked more than 1 time.
+-verify(fareService, never()).fareCacheSearch("3");
+	-verifies the method is never invoked.
+	-fails if method is invoked.
+-verify(fareService, times(3)).fareCacheSearch("4");
+	-verifies how many times the given method has been called.
+	-fails if the method get called more or less than the given number in times(num).
+-verify(fareService, atLeast(4)).fareCacheSearch("4");
+	-verifies weather the method has been called atleast more than the given number.
+	-fails if method has been called lessar than the given number in atLeast(num).
+-then(fareService).should().fareCacheSearch("4");
+	-can be used in bdd after the given statement to check the method should get called.
+-then(fareService).should(never()).fareCacheSearch("4");
+	-verifies the method is never called after the given statement.
+-then(fareService).should(times(3)).fareCacheSearch("4");
+	-verifies the method is called given number of times after the given statement.
+-ArgumentCaptor<String> stringArg = ArgumentCaptor.forClass(String.class);
+then(fareService).should(times(3)).fareCacheSearch(stringArg.capture());
+assertThat(stringArg.getValue(), is("4"));
+assertThat(stringArg.getAllValues().size(), is(3));
+	-to checks the argumet getting pass to method.
+	-to checks multiple arguments pass to method.
+_______________________________________________________________________________
+-HAMCREST:
+-assertThat(scores, hasSize(3));
+	-verifies the List size of first obejct with the value passed in hasSize(value).
+-assertThat(scores, hasItems(99,20,1));
+	-verifies the items in the first List values passed in hasItems(values ..).
+-assertThat(scores, everyItem(greaterThan(10)));
+	-verifies the items in the List are greater than the value passed in everyItem(greaterThan(value)).
+-assertThat(scores, everyItem(lessThan(10)));
+	-verifies the items in the List are less than the value passed in everyItem(greaterThan(value)).
+-assertThat("", emptyString());assertThat(null, emptyOrNullString());
+	-verifies an empty String.
+	-verifies a null or empty String.
+-assertThat(array, arrayWithSize(6));
+	-verifies array size.
+-assertThat(array, arrayContaining(1,2,3,4,5,6));
+	-verifies items in the array.
+_______________________________________________________________________________
+-MOCKITO ANNOTATIONS:
+-@Mock
+	-this creates a mock of a class.
+-@ExtendWith(MockitoJUnitRunner.class)
+	-this enables the mockito annotations.
+-@InjectMocks
+	-this creates a mock of a class an auto inject its depency.
+-@Captor
+	-it auto initialize the ArgumentCaptor otject.
+-@Spy
+	-can have a track of the behavior or can overwrite the the behavior of method.
+_______________________________________________________________________________	
+-MOCKING STATIC METHODS
+-1-@RunWith(PowerMockRunner.class)
+-2-@PreparreForTest(ClassName.class)
+	-ClassName.class: this the class having static methods
+-PowerMockito.mockStatic(ClassName.class)
+	-ClassName.class: this the class having static methods
+	-this tels the environment to get ready for statci mehtod call from the mentioned class.
+-PowerMockito.verifiesStatic
+-ClassName.staticMethod()
+	-verifies the static method call.
+_______________________________________________________________________________
+-MOCKING PRIVATE METHODS
+- ReturnType val = WhiteBox.invokeMethod(classInstance,"methodname");
+	-invokes the private method of class.
+_______________________________________________________________________________	
+-UNIT TEST METHOD NAME BEST PRACTICE
+	-methodNameUnderTest_BehaviorOfMethod_ResultOfMethod()
