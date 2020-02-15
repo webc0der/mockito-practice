@@ -1,0 +1,50 @@
+jUnit Notes:
+-@Test
+	-every test case/method will be anotated with this annotation. 
+-assertEquals();
+	-checks the passed values are same or not.
+-assertNotNull();
+	-checks weather the passed value is null or not.
+	-Success if the value is not null.
+-assertNull();
+	-checks weather the passed value is null or not.
+	-Success if the value is null.
+-assertFalse();
+	-checks weather the passed value is False or not.
+	-Successon if the passed value is fasle.
+-assertTrue();
+	-checks weather the passed value is True or not.
+	-Successon if the passed value is True.
+-assertArrayEquals(expected, actual);
+	-checks weather the two given arrays are same or not.
+-@BeforeEach
+	-executes method anotated with this before every test case.
+-@AfterEach
+	-executes method anotated with this after every test case.
+-@BeforeAll
+	-executes method anotated with this once before all test case.
+-@alfterAll
+	-executes method anotated with this once after all test case.
+-assertThrows(expectedException.class, code or method which throws exception)
+	-to check the exception.
+-@DisplayName
+	-to name the test case.
+-@ParameterizedTest(name = "testing case for {0}") / (name = "{0}testing case for {1}") --> for csv souce
+	-@ValueSource(values)
+		-can pass multiple values to the test using this.
+	-@CsvSource(values={"inp,expected","inp1,expected1","inp2,expected2"})
+		method(String inp, String expected)
+		-can use coma separed multiple values to the test case.
+-@Repeated(number)
+	-can run a specific test case for the multiple times as per the number specified.
+-assertTimeout(Duration.ofSeconds(5), () -> {for(int i = 0;i<=1000000;i++)System.out.println(i);});
+	-can test the performance/duration od method.
+-@Disabled
+	-can disable a specefic test case(method or class) on build and on run.
+-@Nested(class level)
+	-can group multiple test case in one.
+-xunitpatterns.com
+	-design patterns for unit testing.
+	
+
+	
